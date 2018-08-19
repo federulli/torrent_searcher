@@ -1,6 +1,6 @@
 import requests
-from settings import YTS_TRACKER_LIST
-from errors.torrent_not_found import TorrentNotFound
+from torrent_searcher.settings import YTS_TRACKER_LIST
+from torrent_searcher.errors.torrent_not_found import TorrentNotFound
 
 
 class YTSSearcher(object):

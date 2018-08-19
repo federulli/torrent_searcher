@@ -33,8 +33,10 @@ SOFTWARE.
 import sys
 
 if sys.version_info >= (3, 0):
-    from tpb.tpb import TPB
-    from tpb.constants import ORDERS, CATEGORIES
+    from torrent_searcher.tpb.constants import ORDERS, CATEGORIES
+    #from .tpb.constants import ORDERS, CATEGORIES
+    from torrent_searcher.tpb.tpb import TPB
+    #from .tpb.tpb import TPB
 else:
-    from tpb import TPB
-    from constants import ORDERS, CATEGORIES
+    from .tpb import TPB
+    from .constants import ORDERS, CATEGORIES
