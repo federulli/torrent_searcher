@@ -7,7 +7,7 @@ class PirateBaySearcher(object):
     def __init__(self, url):
         self._pirategateway = TPB(url)
 
-    def search_for_tv_show(self, name, season):
+    def search_for_tv_show(self, name, season, chapters=0):
         chapters = {}
         for page in range(0, 10):
             torrents = self._pirategateway.search(name).order(ORDERS.SEEDERS.DES).page(page)
