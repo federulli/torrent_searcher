@@ -8,7 +8,7 @@ class YTSSearcher(object):
     def __init__(self, url):
         self._url = url
 
-    def search_movie(self, name, quality='720p'):
+    def search_movie(self, name, quality='1080p'):
         movie_payload = requests.get(
             '{}/list_movies.json'.format(self._url), params={'query_term': name}
         )

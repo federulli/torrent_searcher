@@ -17,7 +17,7 @@ class RarbgSearcher(object):
             try:
                 chapter = self._get_chapter_from_file(torrent.filename, season)
                 if not chapters[chapter]:
-                    chapters[chapter] = torrent
+                    chapters[chapter] = torrent.download
             except:
                 continue
         not_found_chapters = [key for key, value in chapters.items() if value is None]
@@ -34,7 +34,7 @@ class RarbgSearcher(object):
                 try:
                     chapter = self._get_chapter_from_file(torrent.filename, season)
                     if not chapters[chapter]:
-                        chapters[chapter] = torrent
+                        chapters[chapter] = torrent.download
                 except:
                     continue
         return chapters

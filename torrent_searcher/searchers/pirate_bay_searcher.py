@@ -1,4 +1,4 @@
-from torrent_searcher.tpb import TPB, ORDERS
+from torrent_searcher.searchers.tpb import TPB, ORDERS
 import re
 
 
