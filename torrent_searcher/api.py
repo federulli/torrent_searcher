@@ -20,4 +20,4 @@ class Searcher(object):
         return self._series[0].search_for_tv_show(name, season, chapters)
 
     def search_movie(self, name, quality='1080p'):
-        self._movies[0].search_movie(name, quality)
+        return self._movies[0].search_movie(name, quality)
