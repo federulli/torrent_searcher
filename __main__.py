@@ -21,9 +21,7 @@ for key in a.keys():
     print ("---------------------------------")
 """
 
-from api import Searcher
+from torrent_searcher.api import Searcher
 
-a = Searcher().search_for_series("The Haunting of Hill House", 1, 13)
-for key in a.keys():
-    print(key)
-    print(a[key])
+a = Searcher().search_for_series("", 1, 23)
+print (a)

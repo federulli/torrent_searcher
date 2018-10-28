@@ -7,8 +7,7 @@ class RarbgSearcher(object):
     def __init__(self):
         self._rarbggateway = RarbgAPI()
 
-    def search_for_tv_show(self, name, season, chapters=0):
-        chapters = {chapter: None for chapter in range(1, chapters + 1)}
+    def search_for_tv_show(self, name, season, chapters):
         torrents = self._rarbggateway.search(
             search_string="{} s{}e".format(name, str(season).zfill(2)),
             limit=100
@@ -37,7 +36,6 @@ class RarbgSearcher(object):
                         chapters[chapter] = torrent.download
                 except:
                     continue
-        return chapters
 
     @staticmethod
     def _get_chapter_from_file(file, season):

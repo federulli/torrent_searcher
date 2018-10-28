@@ -18,8 +18,7 @@ class EztvSearcher(object):
     def __init__(self, url):
         self._url = url
 
-    def search_for_tv_show(self, name, season, chapters=0):
-        chapters = {chapter: None for chapter in range(1, chapters + 1)}
+    def search_for_tv_show(self, name, season, chapters):
         imdb_id = get_imdb_id(name)
         page = 1
         torrents = self._get_torrents(imdb_id, page)
@@ -33,7 +32,6 @@ class EztvSearcher(object):
                     chapters[torrent.episode] = torrent.magnet
             page += 1
             torrents = self._get_torrents(imdb_id, page)
-        return chapters
 
     def _get_torrents(self, imdb_id, page):
         r = requests.get(
