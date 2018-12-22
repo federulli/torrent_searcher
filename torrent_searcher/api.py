@@ -29,5 +29,5 @@ class Searcher(object):
             searcher = next(iterator, None)
         return chapters
 
-    def search_movie(self, name, quality='1080p'):
-        return self._movies[0].search_movie(name, quality)
+    def search_movie(self, name, quality='1080p', year=None):
+        return self._movies[0].search_movie(name, quality, year)

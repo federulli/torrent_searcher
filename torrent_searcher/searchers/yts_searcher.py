@@ -8,14 +8,14 @@ class YTSSearcher(object):
     def __init__(self, url):
         self._url = url
 
-    def search_movie(self, name, quality='1080p'):
+    def search_movie(self, name, quality, year):
         movie_payload = requests.get(
             '{}/list_movies.json'.format(self._url), params={'query_term': name}
         )
         try:
             return next(
                 self._build_magnet_uri(movie['hash'])
-                for movie in self._get_movie_json(movie_payload, name)['torrents']
+                for movie in self._get_movie_json(movie_payload, name, year)['torrents']
                 if movie['quality'] == quality
             )
         except Exception:
@@ -28,8 +28,14 @@ class YTSSearcher(object):
             '&tr='.join(YTS_TRACKER_LIST)
         )
 
-    def _get_movie_json(self, payload, name):
+    def _get_movie_json(self, payload, name, year):
+        for movie in payload.json()['data']['movies']:
+            if name.upper() in movie['title'].upper() and (
+                    not year or int(year) == int(movie['year'])):
+                return movie
+
+"""
         return next(iter([
             movie for movie in payload.json()['data']['movies']
             if name.upper() in movie['title'].upper()
-        ]), None)
+        ]), None)"""

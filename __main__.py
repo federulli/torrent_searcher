@@ -23,5 +23,5 @@ for key in a.keys():
 
 from torrent_searcher.api import Searcher
 
-a = Searcher().search_for_series("Outlander", 1, 23)
+a = Searcher().search_movie("the mask", year=1994)
 print (a)
