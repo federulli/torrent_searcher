@@ -7,6 +7,10 @@ from .settings import (
     DEFAULT_EZTV_URL,
 )
 
+import structlog
+
+logger = structlog.get_logger()
+
 
 class Searcher(object):
 
@@ -26,11 +30,14 @@ class Searcher(object):
         searcher = next(iterator, None)
         while searcher and any(value is None for value in chapters.values()):
             try:
-                searcher.search_for_tv_shorw(name, season, chapters)
-            except Exception:
-                pass
+                searcher.search_for_tv_show(name, season, chapters)
+            except:
+                logger.exception(str(searcher), exc_info=True)
             searcher = next(iterator, None)
         return chapters
 
     def search_movie(self, name, quality='1080p', year=None):
-        return self._movies[0].search_movie(name, quality, year)
+        try:
+            return self._movies[0].search_movie(name, quality, year)
+        except:
+            logger.exception("ERROR", exc_info=True)

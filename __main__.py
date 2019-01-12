@@ -25,3 +25,5 @@ from torrent_searcher.api import Searcher
 
 a = Searcher().search_movie("the mask", year=1994)
 print (a)
+a = Searcher().search_for_series("The Haunting of Hill House", 1, 13)
+print (a)
