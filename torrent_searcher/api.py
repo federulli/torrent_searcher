@@ -25,7 +25,10 @@ class Searcher(object):
         iterator = iter(self._series)
         searcher = next(iterator, None)
         while searcher and any(value is None for value in chapters.values()):
-            searcher.search_for_tv_show(name, season, chapters)
+            try:
+                searcher.search_for_tv_shorw(name, season, chapters)
+            except Exception:
+                pass
             searcher = next(iterator, None)
         return chapters
 
