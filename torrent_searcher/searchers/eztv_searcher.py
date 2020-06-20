@@ -45,5 +45,5 @@ class EztvSearcher(object):
                 int(torrent['episode']),
                 torrent['magnet_url']
             )
-            for torrent in r.json().get('torrents', []) if torrent["imdb_id"] == imdb_id
+            for torrent in r.json().get('torrents', []) if str(torrent["imdb_id"]) == str(imdb_id)
         ]

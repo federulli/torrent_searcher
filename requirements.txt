@@ -5,3 +5,6 @@ lxml
 purl
 rarbgapi
 structlog
+pytest
+pytest-mock
+responses
