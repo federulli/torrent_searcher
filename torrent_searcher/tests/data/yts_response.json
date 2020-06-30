@@ -1,0 +1,76 @@
+{
+    "status": "ok",
+    "status_message": "Query was successful",
+    "data": {
+        "movie_count": 1,
+        "limit": 20,
+        "page_number": 1,
+        "movies": [
+            {
+                "id": 2863,
+                "url": "https://yts.mx/movies/star-wars-episode-vi-return-of-the-jedi-1983",
+                "imdb_code": "tt0086190",
+                "title": "Star Wars: Episode VI - Return of the Jedi",
+                "title_english": "Star Wars: Episode VI - Return of the Jedi",
+                "title_long": "Star Wars: Episode VI - Return of the Jedi (1983)",
+                "slug": "star-wars-episode-vi-return-of-the-jedi-1983",
+                "year": 1983,
+                "rating": 8.3,
+                "runtime": 131,
+                "genres": [
+                    "Action",
+                    "Adventure",
+                    "Fantasy",
+                    "Romance",
+                    "Sci-Fi"
+                ],
+                "summary": "Luke Skywalker battles Jabba the Hutt and Darth Vader to save his comrades in the Rebel Alliance and triumph over the Galactic Empire. Han Solo and Princess Leia reaffirm their love, and team with Chewbacca, Lando Calrissian, the Ewoks, and droids C-3PO and R2-D2 to aid in the disruption of the Dark Side, and the defeat of the evil emperor.",
+                "description_full": "Luke Skywalker battles Jabba the Hutt and Darth Vader to save his comrades in the Rebel Alliance and triumph over the Galactic Empire. Han Solo and Princess Leia reaffirm their love, and team with Chewbacca, Lando Calrissian, the Ewoks, and droids C-3PO and R2-D2 to aid in the disruption of the Dark Side, and the defeat of the evil emperor.",
+                "synopsis": "Luke Skywalker battles Jabba the Hutt and Darth Vader to save his comrades in the Rebel Alliance and triumph over the Galactic Empire. Han Solo and Princess Leia reaffirm their love, and team with Chewbacca, Lando Calrissian, the Ewoks, and droids C-3PO and R2-D2 to aid in the disruption of the Dark Side, and the defeat of the evil emperor.",
+                "yt_trailer_code": "16YLjTkK5jE",
+                "language": "English",
+                "mpa_rating": "PG",
+                "background_image": "https://yts.mx/assets/images/movies/Star_Wars_Episode_VI_Return_of_the_Jedi_1983/background.jpg",
+                "background_image_original": "https://yts.mx/assets/images/movies/Star_Wars_Episode_VI_Return_of_the_Jedi_1983/background.jpg",
+                "small_cover_image": "https://yts.mx/assets/images/movies/Star_Wars_Episode_VI_Return_of_the_Jedi_1983/small-cover.jpg",
+                "medium_cover_image": "https://yts.mx/assets/images/movies/Star_Wars_Episode_VI_Return_of_the_Jedi_1983/medium-cover.jpg",
+                "large_cover_image": "https://yts.mx/assets/images/movies/Star_Wars_Episode_VI_Return_of_the_Jedi_1983/large-cover.jpg",
+                "state": "ok",
+                "torrents": [
+                    {
+                        "url": "https://yts.mx/torrent/download/6828DF5E1037A95695A8713B99DBE57A20AE8530",
+                        "hash": "6828DF5E1037A95695A8713B99DBE57A20AE8530",
+                        "quality": "720p",
+                        "type": "bluray",
+                        "seeds": 168,
+                        "peers": 27,
+                        "size": "1.13 GB",
+                        "size_bytes": 1213328261,
+                        "date_uploaded": "2018-05-03 02:16:17",
+                        "date_uploaded_unix": 1525306577
+                    },
+                    {
+                        "url": "https://yts.mx/torrent/download/C92F656155D0D8E87D21471D7EA43E3AD0D42723",
+                        "hash": "C92F656155D0D8E87D21471D7EA43E3AD0D42723",
+                        "quality": "1080p",
+                        "type": "bluray",
+                        "seeds": 654,
+                        "peers": 72,
+                        "size": "1.80 GB",
+                        "size_bytes": 1932735283,
+                        "date_uploaded": "2015-11-01 01:41:47",
+                        "date_uploaded_unix": 1446338507
+                    }
+                ],
+                "date_uploaded": "2018-05-03 02:16:17",
+                "date_uploaded_unix": 1525306577
+            }
+        ]
+    },
+    "@meta": {
+        "server_time": 1593294846,
+        "server_timezone": "CET",
+        "api_version": 2,
+        "execution_time": "0 ms"
+    }
+}

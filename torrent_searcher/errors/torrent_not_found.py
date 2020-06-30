@@ -1,2 +1,0 @@
-class TorrentNotFound(Exception):
-    pass

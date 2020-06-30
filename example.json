@@ -1,0 +1,14 @@
+[
+    {
+        "type": "SERIES",
+        "name": "the flash",
+        "season": "2",
+        "quality":"1080p"
+    },
+    {
+        "type": "MOVIE",
+        "name": "return of the jedi",
+        "quality": "1080p",
+        "year": null
+    }
+]

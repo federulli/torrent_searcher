@@ -9,5 +9,5 @@ YTS_TRACKER_LIST = (
     'udp://tracker.leechers-paradise.org:6969',
 )
 
-DEFAULT_YTS_URL = 'https://yts.am/api/v2'
-DEFAULT_EZTV_URL = 'https://eztv.ag/api/get-torrents'
+YTS_URL = 'https://yts.am/api/v2'
+EZTV_URL = 'https://eztv.ag/api/get-torrents'

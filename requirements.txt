@@ -1,10 +1,12 @@
 requests
 bs4
 python-dateutil
-lxml
 purl
-rarbgapi
 structlog
 pytest
 pytest-mock
 responses
+jsonschema
+pytest-asyncio
+aiohttp-requests
+aresponses
