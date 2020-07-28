@@ -27,7 +27,7 @@ async def get_torrents(imdb_id):
         r.raise_for_status()
 
         payload = await r.json()
-        print(payload)
+        
         torrents = payload.get('torrents', [])
         if not torrents:
             return

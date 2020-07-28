@@ -33,6 +33,7 @@ def get_movie_json(payload, name, year):
         )
         if all(criteria):
             return movie
+    return {}
 
 
 async def search(name, quality, year):
@@ -42,10 +43,10 @@ async def search(name, quality, year):
     r.raise_for_status()
     movie_payload = await r.json()
     try:
+        movie = get_movie_json(movie_payload, name, year)
         return next(
-            build_magnet_uri(movie['hash'])
-            for movie in get_movie_json(movie_payload, name, year)['torrents']
-            if movie['quality'] == quality
+            build_magnet_uri(torrent['hash'])
+            for torrent in movie.get('torrents', []) if torrent['quality'] == quality
         )
     except StopIteration:
         raise NotFoundException(f"YTS: Could not find {name} with {quality} quality")

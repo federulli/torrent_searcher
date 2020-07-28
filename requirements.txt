@@ -10,3 +10,4 @@ jsonschema
 pytest-asyncio
 aiohttp-requests
 aresponses
+aioresponses

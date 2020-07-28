@@ -2,7 +2,8 @@ import structlog
 
 from torrent_searcher.searchers import MOVIES, SERIES
 from torrent_searcher.errors import NotCompletedException, NotFoundException
-from torrent_searcher.searchers.series.async_eztv import search
+from torrent_searcher.searchers.series import async_eztv
+from torrent_searcher.searchers.movies import async_yts
 logger = structlog.get_logger()
 
 
@@ -24,7 +25,7 @@ class Searcher(object):
        
     async def _search_for_series(self, name, season, episode_count):
         episodes = {chapter: None for chapter in range(1, int(episode_count) + 1)}
-        for search_coroutine in [search]:
+        for search_coroutine in (async_eztv.search,):
             try:
                 await search_coroutine(name, season, episodes)
             except (NotFoundException, NotCompletedException) as e:
@@ -37,9 +38,13 @@ class Searcher(object):
         return episodes
         
 
-    """def _search_for_movie(self, name, quality='1080p', year=None):
-        try:
-            return MOVIES[0].search_movie(name, quality, year)
-        except Exception:
-            logger.exception("ERROR", exc_info=True)
-    """
+    async def _search_for_movie(self, name, quality='1080p', year=None):
+        for search_coroutine in (async_yts.search,):
+            try: 
+                return await search_coroutine(name, quality, year)
+            except NotFoundException as e:
+                logger.info(str(e))
+            except Exception:
+                logger.exception("ERROR", exc_info=True)
+        logger.info(f"Could not find {name} {year} {quality} with any searcher")
+    

@@ -6,7 +6,7 @@ from torrent_searcher.searchers.series.eztv import URL
 
 
 @pytest.mark.asyncio
-async def test_completeted_ok(aresponses):
+async def test_series_completeted_ok(aresponses):
     for page in range(1, 7):
         with open ("torrent_searcher/tests/data/eztv_ag_response_page{}.json".format(page)) as f:
             aresponses.add(
