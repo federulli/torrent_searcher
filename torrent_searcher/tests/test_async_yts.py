@@ -21,6 +21,7 @@ async def test_find_magnet_ok():
         assert "6828DF5E1037A95695A8713B99DBE57A20AE8530" in magnet
 
 
+
 @pytest.mark.asyncio
 async def test_no_movies():
     with aioresponses() as m:
