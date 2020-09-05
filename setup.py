@@ -1,20 +1,17 @@
 import os
 from setuptools import setup, find_packages
-from pip._internal.req import parse_requirements
 
-# Utility function to read the README file.
-# Used for the long_description.  It's nice, because now 1) we have a top level
-# README file and 2) it's easier to type in the README file than to put a raw
-# string in below ...
+path = os.path.dirname(os.path.realpath(__file__))
+requirement_path = f'{path}/requirements.txt'
+
+install_requires = []
+if os.path.isfile(requirement_path):
+    with open(requirement_path) as f:
+        install_requires = f.read().splitlines()
 
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
-
-
-def load_requirements(fname):
-    reqs = parse_requirements(fname, session="test")
-    return [str(ir.req) for ir in reqs]
 
 
 setup(
@@ -23,7 +20,7 @@ setup(
     author="Federico Rulli",
     author_email="fede.rulli@gmail.com",
     description="Torrent Searcher",
-    install_requires=load_requirements("requirements.txt"),
+    install_requires=install_requires,
     packages=find_packages(),
     long_description=read('README.md')
 )
