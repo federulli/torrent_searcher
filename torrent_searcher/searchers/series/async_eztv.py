@@ -6,13 +6,14 @@ from distutils.util import strtobool
 from aiohttp_requests import requests
 
 from torrent_searcher.errors import NotCompletedException, NotFoundException
+from torrent_searcher import Series
 
 
 URL = 'https://eztv.ag/api/get-torrents'
 Torrent = namedtuple("Torrent", ['filename', 'season', 'episode', 'magnet'])
 
 
-async def get_imdb_id(name):
+async def get_imdb_id(name: str):
     r = await requests.get("http://www.omdbapi.com", params={"t": name, "apikey": "8a90e315"})
     r.raise_for_status()
     payload = await r.json()
@@ -40,16 +41,16 @@ async def get_torrents(imdb_id):
                 )
 
 
-async def search(name, season, episodes):
-    imdb_id = await get_imdb_id(name)
+async def search(series: Series):
+    imdb_id = await get_imdb_id(series.name)
     async for torrent in get_torrents(imdb_id):
         validations = (
-            int(torrent.season) == int(season),
-            episodes.get(torrent.episode) is None
+            int(torrent.season) == int(series.season),
+            series.episodes.get(torrent.episode) is None
         )
         if all(validations):
-            episodes[torrent.episode] = torrent.magnet
-        if all(episodes.values()):
+            series.episodes[torrent.episode] = torrent.magnet
+        if all(series.episodes.values()):
             break
-    if not all(episodes.values()):
-        raise NotCompletedException(f"Could not complete {name} {season} with EZTV")
+    if not all(series.episodes.values()):
+        raise NotCompletedException(f"Could not complete {series.name} {series.season} with EZTV")

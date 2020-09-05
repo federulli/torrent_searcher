@@ -6,7 +6,6 @@ structlog
 pytest
 pytest-mock
 responses
-jsonschema
 pytest-asyncio
 aiohttp-requests
 aresponses

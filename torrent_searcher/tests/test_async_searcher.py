@@ -3,9 +3,9 @@ import pytest
 import json
 from aioresponses import aioresponses
 
-from torrent_searcher.async_searcher import Searcher, Movie, Series
+from torrent_searcher.api import Searcher, Movie, Series
 from torrent_searcher.tests.data.eztv_responses import PAGE_1
-from torrent_searcher.searchers.series.eztv import URL
+from torrent_searcher.searchers.series.async_eztv import URL
 
 YTS_URL = 'https://yts.am/api/v2/list_movies.json?query_term=return+of+the+jedi'
 
@@ -64,19 +64,18 @@ def test_find_movie_and_series_magnet_with_search_ok():
             payload = json.load(f)
             m.get(YTS_URL, payload=payload)
             searcher = Searcher()
-            data = [
-                {
-                    "name": "return of the jedi",
-                    "quality":"1080p",
-                    "year":1983,
-                    "type": "MOVIE"
-                },
-                {
-                  "name": "the flash",
-                  "season": 2,
-                  "episode_count": 21,
-                  "quality": '1080p'      
-                }
+            entities = [
+                Movie(
+                    name="return of the jedi",
+                    quality="1080p",
+                    year=1983
+                ),
+                Series(
+                   name="the flash",
+                   season=2,
+                   episode_count=21,
+                   quality='1080p'      
+                )
             ]
-            entities = searcher.search(data)
+            searcher.search(entities)
             assert "C92F656155D0D8E87D21471D7EA43E3AD0D42723" in entities[0].magnet

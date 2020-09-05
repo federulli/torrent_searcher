@@ -1,5 +1,6 @@
-import asyncio
 from aiohttp_requests import requests
+
+from torrent_searcher import Movie
 from torrent_searcher.settings import YTS_TRACKER_LIST
 from torrent_searcher.errors import NotFoundException
 
@@ -18,14 +19,14 @@ TRACKER_LIST = (
 URL = 'https://yts.am/api/v2'
 
 
-def build_magnet_uri(movie_hash):
+def build_magnet_uri(movie_hash: str) -> str:
     return 'magnet:?xt=urn:btih:{}&dn=Url+Encoded+Movie+Name&tr={}'.format(
         movie_hash,
         '&tr='.join(YTS_TRACKER_LIST)
     )
 
 
-def get_movie_json(payload, name, year):
+def get_movie_json(payload: dict, name: str, year: str) -> dict:
     for movie in payload['data']['movies']:
         criteria = (
             name.upper() in movie['title'].upper(),
@@ -36,17 +37,17 @@ def get_movie_json(payload, name, year):
     return {}
 
 
-async def search(name, quality, year):
+async def search(movie: Movie) -> None:
     r = await requests.get(
-        '{}/list_movies.json'.format(URL), params={'query_term': name}
+        '{}/list_movies.json'.format(URL), params={'query_term': movie.name}
     )
     r.raise_for_status()
     movie_payload = await r.json()
     try:
-        movie = get_movie_json(movie_payload, name, year)
-        return next(
+        movie_data = get_movie_json(movie_payload, movie.name, movie.year)
+        movie.magnet = next(
             build_magnet_uri(torrent['hash'])
-            for torrent in movie.get('torrents', []) if torrent['quality'] == quality
+            for torrent in movie_data.get('torrents', []) if torrent['quality'] == movie.quality
         )
     except StopIteration:
-        raise NotFoundException(f"YTS: Could not find {name} with {quality} quality")
+        raise NotFoundException(f"YTS: Could not find {movie.name} with {movie.quality} quality")

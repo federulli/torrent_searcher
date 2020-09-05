@@ -8,6 +8,7 @@ from torrent_searcher.searchers.series.async_eztv import (
 )
 
 from torrent_searcher.tests.data.eztv_responses import PAGE_1
+from torrent_searcher import Series
 
 
 @pytest.mark.asyncio
@@ -45,10 +46,15 @@ async def test_for_tv_show(aresponses):
         'www.omdbapi.com', '/',
         'get', response={"imdbID": "tt3107288", "Response": "True"}
     )
-
-    episodes = {chapter: None for chapter in range(1, 22)}
-    await search("the flash", 2, episodes)
-    assert all(magnet is not None for number, magnet in episodes.items())
+    series = Series(
+        name="the flash",
+        season=2,
+        episode_count=22,
+        quality="720p",
+        episodes={chapter: None for chapter in range(1, 22)}
+    )
+    await search(series)
+    assert all(magnet is not None for number, magnet in series.episodes.items())
 
 
 @pytest.mark.asyncio
@@ -61,9 +67,15 @@ async def test_no_magnet_found(aresponses):
         'eztv.ag', '/api/get-torrents',
         'get', response={}
     )
-    episodes = {chapter: None for chapter in range(1, 22)}
+    series = Series(
+        name="the flash",
+        season=2,
+        episode_count=22,
+        quality="720p",
+        episodes={chapter: None for chapter in range(1, 22)}
+    )
     with pytest.raises(NotCompletedException):
-        await search("the flash", 2, episodes)
+        await search(series)
 
 
 @pytest.mark.asyncio
@@ -76,9 +88,15 @@ async def test_no_imdb_found(aresponses):
         'eztv.ag', '/api/get-torrents',
         'get', response={}
     )
-    episodes = {chapter: None for chapter in range(1, 22)}
+    series = Series(
+        name="the flash",
+        season=2,
+        episode_count=22,
+        quality="720p",
+        episodes={chapter: None for chapter in range(1, 22)}
+    )
     with pytest.raises(NotFoundException):
-        await search("the flash", 2, episodes)
+        await search(series)
 
 
 @pytest.mark.asyncio
@@ -95,7 +113,12 @@ async def test_no_completed(aresponses):
         'eztv.ag', '/api/get-torrents',
         'get', response={}
     )
-
-    episodes = {chapter: None for chapter in range(1, 22)}
+    series = Series(
+        name="the flash",
+        season=2,
+        episode_count=22,
+        quality="720p",
+        episodes={chapter: None for chapter in range(1, 22)}
+    )
     with pytest.raises(NotCompletedException):
-        await search("the flash", 2, episodes)
+        await search(series)
